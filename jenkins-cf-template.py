@@ -21,7 +21,7 @@ from troposphere import (
     Template,
 )
 from troposphere.iam import (
-    InstanceProfile
+    InstanceProfile,
     PolicyType as IAMPolicy,
     Role,
 )
