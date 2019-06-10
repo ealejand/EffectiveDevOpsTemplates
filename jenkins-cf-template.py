@@ -29,6 +29,7 @@ from troposphere.iam import (
 
 ApplicationName = "jenkins"
 ApplicationPort = "8080"
+PublicCidrIp = str(ip_network(get_ip()))
 
 GithubAccount = "ealejand"
 GithubAnsibleURL = "https://github.com/{}/ansible".format(GithubAccount)
@@ -59,7 +60,7 @@ t.add_resource(
                 IpProtocol="tcp",
                 FromPort="22",
                 ToPort="22",
-                CidrIp="0.0.0.0/0"
+                CidrIp="PublicCidrIp"
             ),
             ec2.SecurityGroupRule(
                 IpProtocol="tcp",
