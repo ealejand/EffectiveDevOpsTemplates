@@ -31,15 +31,6 @@ ApplicationName = "jenkins"
 ApplicationPort = "8080"
 PublicCidrIp = str(ip_network(get_ip()))
 
-GithubAccount = "ealejand"
-GithubAnsibleURL = "https://github.com/{}/ansible".format(GithubAccount)
-
-AnsiblePullCmd = \
-    "/usr/local/bin/ansible-pull -U {} {}.yml -i localhost".format(
-        GithubAnsibleURL,
-        ApplicationName
-    )
-
 # Start building the template
 t = Template()
 t.add_description("Effective DevOps in AWS: HelloWorld web application")
@@ -73,12 +64,6 @@ t.add_resource(
 )
 
 # Generate the script for launching our web service
-ud = Base64(Join('\n', [
-    "#!/bin/bash",
-    "sudo yum install --enablerepo=epel -y git",
-    "pip install ansible",
-    AnsiblePullCmd,
-    "echo '*/10 * * * * {}' > /etc/cron.d/ansible-pull".format(AnsiblePullCmd)]))
 
 t.add_resource(Role(
     "Role",
