@@ -92,7 +92,6 @@ t.add_resource(
         InstanceType="t2.micro",
         SecurityGroups=[Ref("SecurityGroup")],
         KeyName=Ref("KeyPair"),
-        UserData=ud,
         IamInstanceProfile=Ref("InstanceProfile"),
     )
 )
